@@ -1,0 +1,28 @@
+{
+   "name": "Plivo 2 Factor Authentication App",
+  "description": "Plivo 2 Factor Authentication App",
+  "keywords": [
+    "plivo",
+    "2FA",
+    "MFA",
+    "2 Factor Auth",
+    "Multi Factor Auth"
+  ],
+  "website": "https://www.plivo.com/",
+  "repository": "https://github.com/plivo/voicechat",
+  "logo": "https://s3.amazonaws.com/plivo_blog_uploads/static_assets/images/press/plivo-color-icon-dark1-large.png",
+  "success_url": "/",
+  "env": {
+    "PLIVO_AUTH_ID": {
+      "description": "Your Plivo AuthID from https://manage.plivo.com"
+    },
+    "PLIVO_AUTH_TOKEN": {
+      "description": "Your Plivo AuthToken from https://manage.plivo.com"
+    },
+    "PLIVO_NUMBER": "The number in your Plivo account with which you want to send the verification message"
+  },
+  "image": "heroku/python",
+  "addons": [
+    "redistogo:nano"
+  ]
+}
