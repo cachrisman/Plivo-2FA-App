@@ -32,6 +32,7 @@ class PlivoTwoFactorAuth:
 										"text": message.replace("__code__", str(code)).strip()
 									})
 
+		print responseCode, responseData
 		if responseCode != 202:
 			raise Exception
 
