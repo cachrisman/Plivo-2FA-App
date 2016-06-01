@@ -35,8 +35,7 @@ This section explains how to deploy this application on Heroku.
 1. [Create an account](https://signup.heroku.com/) on Heroku (its free!).
 1. Verify your Heroku account by adding a credit card. This app doesn't require any paid addons, but to use even free 3rd party Heroku addons you need to add your credit card.
 1. Install the [Heroku toolbelt](https://toolbelt.heroku.com/)
-1. Login to heroku from the toolbelt using the `heroku login` command.
-If you do not have an ssh public key in your system, it prompts to automatically create it. Hit 'Y' when prompted.
+1. Login to heroku from the toolbelt using the `heroku login` command. If you do not have an ssh public key in your system, it prompts to automatically create it. Hit 'Y' when prompted.
     ```
     $ heroku login
     Enter your Heroku credentials.
@@ -47,11 +46,16 @@ If you do not have an ssh public key in your system, it prompts to automatically
     Generating new SSH public key.
     Uploading ssh public key /Users/charlie/.ssh/id_rsa.pub
     ```
-    Once this is done, then we are ready to deploy the application.
 
+1. Once this is done, you are ready to deploy the application.
 
 ### The Actual Deployment
+
+Click the button below to deploy directly to your heroku account:
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+or follow these instructions to test it locally and then deploy to heroku:
 
 1. Change to directory which contains the `Procfile`.
 1. Create a [virtual environment](http://www.virtualenv.org/en/latest/) by running `virtualenv --distribute`.
