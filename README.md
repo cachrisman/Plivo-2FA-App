@@ -13,6 +13,7 @@ The next section explains how the application works and in-turn how Plivo as a p
 
 ## Running the application locally
 You can run the app locally for testing by following these steps:
+
 1. From a terminal window, run `git clone https://github.com/cachrisman/Plivo-2FA-App.git`
 1. Removing the current `.git` folder in the project root using `rm -rf  .git/`.
 1. Create a `.env` file in the project root with the following contents:
@@ -30,10 +31,11 @@ You can run the app locally for testing by following these steps:
 ### Initial Setup
 
 This section explains how to deploy this application on Heroku.
+
 1. [Create an account](https://signup.heroku.com/) on Heroku (its free!).
-2. Verify your Heroku account by adding a credit card. This app doesn't require any paid addons, but to use even free 3rd party Heroku addons you need to add your credit card.
-2. Install the [Heroku toolbelt](https://toolbelt.heroku.com/)
-3. Login to heroku from the toolbelt using the `heroku login` command.
+1. Verify your Heroku account by adding a credit card. This app doesn't require any paid addons, but to use even free 3rd party Heroku addons you need to add your credit card.
+1. Install the [Heroku toolbelt](https://toolbelt.heroku.com/)
+1. Login to heroku from the toolbelt using the `heroku login` command.
 If you do not have an ssh public key in your system, it prompts to automatically create it. Hit 'Y' when prompted.
     ```
     $ heroku login
@@ -50,22 +52,23 @@ If you do not have an ssh public key in your system, it prompts to automatically
 
 ### The Actual Deployment
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-1. Change to directory which contains the `Procfile`.
-2. Create a [virtual environment](http://www.virtualenv.org/en/latest/) by running `virtualenv --distribute`.
-__NOTE__: _if you don't have `virtualenv` installed, then install python setup tools first using `sudo apt-get install python-setuptools` and then install `virtualenv` using `sudo pip install virtualenv`_
-3. Activate the `virtualenv` using `source ./venv/bin/activate`.
-4. Install all the application's dependencies specified in `requirements.txt` using `pip install -r requirements.txt`.
-5. Install the [redistogo](https://addons.heroku.com/redistogo) addon to use the heroku free data store for this application. To add a free redistogo data store to this application use `heroku addons:add redistogo` command.
-6. Once, the dependencies are installed, start the application process locally using `foreman start` command. It should start the application locallly and should NOT throw any error or exception. If successfully started, do `CTRL+C` to stop it.
-10. Create an application on Heroku server using `heroku create` which creates a remote git repo and updates the origin to the newly created git repo.
-11. Now, push the local code to the heroku repo for deployment using `git push heroku master`.
-12. To run one web process as specified in the `Procfile`, run the `heroku ps:scale web=1` command.
-13. Now, the application should be successfully running if everything went right!
-14. We can test it using `heroku ps` command. It should say something like `web.1: up for 5s`.
-15. We can check the application logs using `heroku logs` command.
-16. To open the application in the web browser, type `heroku open` and hit `ENTER`.
-17. You'll see this application in the web browser.
 
-Find the live demo of the application [here](http://shielded-hollows-9845.herokuapp.com/). For more detailed information on deployment on heroku, visit the [official heroku documentation](https://devcenter.heroku.com/articles/python). More information about Plivo APIs can be found in the [offical API docs](http://plivo.com/docs/).
+1. Change to directory which contains the `Procfile`.
+1. Create a [virtual environment](http://www.virtualenv.org/en/latest/) by running `virtualenv --distribute`.
+__NOTE__: _if you don't have `virtualenv` installed, then install python setup tools first using `sudo apt-get install python-setuptools` and then install `virtualenv` using `sudo pip install virtualenv`_
+1. Activate the `virtualenv` using `source ./venv/bin/activate`.
+1. Install all the application's dependencies specified in `requirements.txt` using `pip install -r requirements.txt`.
+1. Install the [redistogo](https://addons.heroku.com/redistogo) addon to use the heroku free data store for this application. To add a free redistogo data store to this application use `heroku addons:add redistogo` command.
+1. Once, the dependencies are installed, start the application process locally using `foreman start` command. It should start the application locallly and should NOT throw any error or exception. If successfully started, do `CTRL+C` to stop it.
+1. Create an application on Heroku server using `heroku create` which creates a remote git repo and updates the origin to the newly created git repo.
+1. Now, push the local code to the heroku repo for deployment using `git push heroku master`.
+1. To run one web process as specified in the `Procfile`, run the `heroku ps:scale web=1` command.
+1. Now, the application should be successfully running if everything went right!
+1. We can test it using `heroku ps` command. It should say something like `web.1: up for 5s`.
+1. We can check the application logs using `heroku logs` command.
+1. To open the application in the web browser, type `heroku open` and hit `ENTER`.
+1. You'll see this application in the web browser.
+
+Find the live demo of the application [here](http://plivo-2fa.herokuapp.com/). For more detailed information on deployment on heroku, visit the [official heroku documentation](https://devcenter.heroku.com/articles/python). More information about Plivo APIs can be found in the [offical API docs](http://plivo.com/docs/).
 
 Helper libraries for various languages are available on the [Plivo github page](http://github.com/plivo).
