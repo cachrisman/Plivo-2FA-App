@@ -19,7 +19,9 @@
     "PLIVO_AUTH_TOKEN": {
       "description": "Your Plivo AuthToken from https://manage.plivo.com"
     },
-    "PLIVO_NUMBER": "The number in your Plivo account with which you want to send the verification message"
+    "PLIVO_NUMBER":{
+      "description": "The number in your Plivo account with which you want to send the verification message"
+    }
   },
   "image": "heroku/python",
   "addons": [
