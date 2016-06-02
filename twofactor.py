@@ -9,11 +9,11 @@ class PlivoTwoFactorAuth:
 		mechanism for applications using Plivo APIs
 	"""
 
-	def __init__(self, credentails, appNumber):
+	def __init__(self, credentials, appNumber):
 		"""
 		"""
-		self.p = plivo.RestAPI(credentails["auth_id"],
-								credentails["auth_token"])
+		self.p = plivo.RestAPI(credentials["auth_id"],
+								credentials["auth_token"])
 		self.appNumber = appNumber
 
 	def getVerificationCode(self, dstNumber, message="__code__"):
