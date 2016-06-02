@@ -5,8 +5,8 @@ itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
 plivo==0.11.0
-python-dotenv==0.5.0
+python-dotenv==0.5.1
 redis==2.10.5
-requests==2.9.1
+requests==2.10.0
 Werkzeug==0.11.9
 wsgiref==0.1.2
