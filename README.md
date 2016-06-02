@@ -1,4 +1,4 @@
-Plivo Two Factor Auth App
+Plivo 2 Factor Authentication (2FA) App
 =======================================
 
 ## About
@@ -10,6 +10,11 @@ The next section explains how the application works and in-turn how Plivo as a p
 ## How to use it
 
 [Here is a live demo](https://plivo-2fa.herokuapp.com/) of this sample application where you can try out how it works. This application verifies your phone number using the two factor authentication system. In the application, enter your phone number in [E.164](http://en.wikipedia.org/wiki/E.164) format (currently works for US numbers) and click on 'Send Verification Code'. This sends an SMS to that number with a random security code in it. The application now shows a text box to enter this code to verify your mobile number. Once you get the code in the SMS, enter the code in the text box and click 'Check'. This will tell you whether the code you entered is correct or not. If you enter the correct code, then the application knows that the phone number belongs to you and thus the number is verified.
+
+## Requirements
+- Git
+- Python 2.7 with PIP and Virtualenv
+- Redis Server
 
 ## Running the application locally
 You can run the app locally for testing by following these steps:
@@ -24,17 +29,25 @@ You can run the app locally for testing by following these steps:
     ```
     `PLIVO_AUTH_ID` and `PLIVO_AUTH_TOKEN` can be found in the [Plivo Dashboard](https://manage.plivo.com/dashboard/) homepage and `PLIVO_NUMBER` should be set to a valid [Plivo Number](https://manage.plivo.com/number) in your account from which you want to send the verification SMS.
 
-1. Now you can run the app locally by running this command `python app.py` in the project root and browsing to http://localhost:5000 to see if it works properly.
+1. Install the redis server on your local machine:
+  - OS X with [Homebrew](http://brew.sh/): Run `brew install redis` to install, then `brew services start redis` to start the server
+  - OS X without Homebrew: follow the quickstart instructions on the [redis website](http://redis.io/topics/quickstart) or google for `os x install redis -homebrew` for guides
+  - Ubuntu: run `sudo apt-get update;sudo apt-get install redis-server` to install, then `sudo service redis-server start` to start the server
+1. Create a [virtual environment](http://www.virtualenv.org/en/latest/) by running `virtualenv --distribute`.
+__NOTE__: _if you don't have `virtualenv` installed, then install python setup tools first using `sudo apt-get install python-setuptools` and then install `virtualenv` using `sudo pip install virtualenv`_
+1. Activate the `virtualenv` using `source ./venv/bin/activate`.
+1. Install all the application's dependencies specified in `requirements.txt` using `pip install -r requirements.txt`.
+1. Now you can run the app locally by running this command `python app.py` in the project root and browsing to http://localhost:5000 to see if it works properly. When done testing, press `CTRL+C` to stop and exit the python server.
 
 ## Deployment on Heroku
 
 ### Initial Setup
 
-This section explains how to deploy this application on Heroku.
+This section explains how to prepare your system to deploy this app to Heroku.
 
 1. [Create an account](https://signup.heroku.com/) on Heroku (its free!).
-1. Verify your Heroku account by adding a credit card. This app doesn't require any paid addons, but to use even free 3rd party Heroku addons you need to add your credit card.
-1. Install the [Heroku toolbelt](https://toolbelt.heroku.com/)
+1. Verify your Heroku account and add a credit card. This app doesn't require any paid addons, but you still need to add your credit card to use free 3rd party Heroku addons.
+1. Install the [Heroku toolbelt](https://toolbelt.heroku.com/).
 1. Login to heroku from the toolbelt using the `heroku login` command. If you do not have an ssh public key in your system, it prompts to automatically create it. Hit 'Y' when prompted.
     ```
     $ heroku login
@@ -55,21 +68,14 @@ Click the button below to deploy directly to your heroku account:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-or follow these instructions to test it locally and then deploy to heroku:
+or follow these instructions to deploy to heroku:
 
-1. Change to directory which contains the `Procfile`.
-1. Create a [virtual environment](http://www.virtualenv.org/en/latest/) by running `virtualenv --distribute`.
-__NOTE__: _if you don't have `virtualenv` installed, then install python setup tools first using `sudo apt-get install python-setuptools` and then install `virtualenv` using `sudo pip install virtualenv`_
-1. Activate the `virtualenv` using `source ./venv/bin/activate`.
-1. Install all the application's dependencies specified in `requirements.txt` using `pip install -r requirements.txt`.
-1. Install the [redistogo](https://addons.heroku.com/redistogo) addon to use the heroku free data store for this application. To add a free redistogo data store to this application use `heroku addons:add redistogo` command.
-1. Once, the dependencies are installed, start the application process locally using `foreman start` command. It should start the application locallly and should NOT throw any error or exception. If successfully started, do `CTRL+C` to stop it.
-1. Create an application on Heroku server using `heroku create` which creates a remote git repo and updates the origin to the newly created git repo.
+1. Run `heroku create` to create an application on Heroku and adds it as a remote to the local git repo.
+1. Run `heroku addons:create redistogo:nano -a YOUR_APP_NAME` (replace YOUR_APP_NAME with the name of the app created in step 1) to install the [redistogo](https://addons.heroku.com/redistogo) addon for this application.
 1. Now, push the local code to the heroku repo for deployment using `git push heroku master`.
 1. To run one web process as specified in the `Procfile`, run the `heroku ps:scale web=1` command.
-1. Now, the application should be successfully running if everything went right!
-1. We can test it using `heroku ps` command. It should say something like `web.1: up for 5s`.
-1. We can check the application logs using `heroku logs` command.
+1. You can see if it is running by using the `heroku ps` command. It should return something like `web.1: up for 5s`.
+1. You can check (and watch) the application logs using `heroku logs -t` command. Press `CTRL+C` to exit.
 1. To open the application in the web browser, type `heroku open` and hit `ENTER`.
 1. You'll see this application in the web browser.
 
