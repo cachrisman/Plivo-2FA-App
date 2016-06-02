@@ -8,7 +8,6 @@ from flask import Flask, render_template, jsonify, send_from_directory
 # Local imports
 from twofactor import PlivoTwoFactorAuth
 
-
 app = Flask(__name__)
 app.config.from_object("settings")  # Load configurations from settings.py
 
@@ -18,47 +17,47 @@ r = redis.from_url(redis_url)
 
 # Plivo two factor authentication configuration
 p2fa = PlivoTwoFactorAuth({
-			   "auth_id": app.config["PLIVO_AUTH_ID"],
-			   "auth_token": app.config["PLIVO_AUTH_TOKEN"]
-		   }, appNumber=app.config["PLIVO_NUMBER"])
+               "auth_id": app.config["PLIVO_AUTH_ID"],
+               "auth_token": app.config["PLIVO_AUTH_TOKEN"]
+           }, appNumber=app.config["PLIVO_NUMBER"])
 
 
 # Applicattion landing page
 @app.route("/")
 def index():
-	""" index() renders the landing page of
-		the application.
-	"""
-	return render_template("index.html")
+    """ index() renders the landing page of
+        the application.
+    """
+    return render_template("index.html")
 
 
 # Number verification initiation
 @app.route("/verify/<number>")
 def verify(number):
-	""" verify(number) accepts a number
-		and initiates verification for it.
-	"""
-	code = p2fa.getVerificationCode(number, app.config["MESSAGE_TEXT"])
-	r.setex("number:%s:code" % number, code, app.config["CODE_VALIDITY"])
-	return jsonify({"status": "success", "message": "verification initiated"})
+    """ verify(number) accepts a number
+        and initiates verification for it.
+    """
+    code = p2fa.getVerificationCode(number, app.config["MESSAGE_TEXT"])
+    r.setex("number:%s:code" % number, code, app.config["CODE_VALIDITY"])
+    return jsonify({"status": "success", "message": "verification initiated"})
 
 
 # Code validation endpoint
 @app.route("/checkcode/<number>/<code>")
 def checkCode(number, code):
-	""" checkCode(number, code) accepts a number
-		and the code entered by the user and tells
-		if the code entered for that number is correct or not
-	"""
-	originalCode =  r.get("number:%s:code" % number)
-	if originalCode:  # checks if code expired
-		if originalCode == code:
-			r.delete("number:%s:code" % number)  # verification successful, delete the code
-			return jsonify({"status": "success", "message": "codes match! number verified"})
-		else:
-			return jsonify({"status": "failure", "message": "codes do not match! number not verified"})
-	else:
-		return jsonify({"status": "failure", "message": "number not found!"})
+    """ checkCode(number, code) accepts a number
+        and the code entered by the user and tells
+        if the code entered for that number is correct or not
+    """
+    originalCode =  r.get("number:%s:code" % number)
+    if originalCode:  # checks if code expired
+        if originalCode == code:
+            r.delete("number:%s:code" % number)  # verification successful, delete the code
+            return jsonify({"status": "success", "message": "codes match! number verified"})
+        else:
+            return jsonify({"status": "failure", "message": "codes do not match! number not verified"})
+    else:
+        return jsonify({"status": "failure", "message": "number not found!"})
 
 
 # Application error handlers
