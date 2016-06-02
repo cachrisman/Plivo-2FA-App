@@ -22,6 +22,11 @@ The next section explains how the application works and in-turn how Plivo as a p
 - Python 2.7 with PIP and Virtualenv
 - Redis Server
 
+## Requirements
+- Git
+- Python 2.7 with PIP and Virtualenv
+- Redis Server
+
 ## Running the application locally
 You can run the app locally for testing by following these steps:
 
@@ -39,8 +44,7 @@ You can run the app locally for testing by following these steps:
   - OS X with [Homebrew](http://brew.sh/): Run `brew install redis` to install, then `brew services start redis` to start the server
   - OS X without Homebrew: follow the quickstart instructions on the [redis website](http://redis.io/topics/quickstart) or google for `os x install redis -homebrew` for guides
   - Ubuntu: run `sudo apt-get update;sudo apt-get install redis-server` to install, then `sudo service redis-server start` to start the server
-1. Create a [virtual environment](http://www.virtualenv.org/en/latest/) by running `virtualenv --distribute`.
-__NOTE__: _if you don't have `virtualenv` installed, run the command `sudo pip install virtualenv` to install `virtualenv`_
+1. Create a [virtual environment](http://www.virtualenv.org/en/latest/) by running `virtualenv venv`. __NOTE__: _if you don't have `virtualenv` installed, run the command `sudo pip install virtualenv` to install `virtualenv`_
 1. Activate the `virtualenv` using `source ./venv/bin/activate`.
 1. Install all the application's dependencies specified in `requirements.txt` using `pip install -r requirements.txt`.
 1. Now you can run the app locally by running this command `python app.py` in the project root and browsing to http://localhost:5000 to see if it works properly. When done testing, press `CTRL+C` to stop and exit the python server.
