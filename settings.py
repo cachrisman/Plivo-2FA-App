@@ -10,7 +10,10 @@ load_dotenv(dotenv_path)
 SITE_TITLE = "Plivo 2FA"
 
 # Application mode
-DEBUG = True
+if 'ON_HEROKU' in os.environ:
+    DEBUG = False
+else:
+    DEBUG = True
 
 # Redis URI
 APPLICATION_REDIS_URI = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
