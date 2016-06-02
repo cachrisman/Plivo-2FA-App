@@ -21,6 +21,10 @@
     },
     "PLIVO_NUMBER":{
       "description": "The number in your Plivo account with which you want to send the verification message"
+    },
+    "ON_HEROKU":{
+      "description": "DON'T CHANGE - An environment variable to tell the app it is running on Heroku (and to disable Debug mode)",
+      "value": "1"
     }
   },
   "image": "heroku/python",
